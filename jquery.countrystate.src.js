@@ -1,9 +1,8 @@
 /**
  * @package jQuery Country-State Select Plugin
  * @author Justen Robertson <justen@justenrobertson.com>
- * @copyright (C) 2011 Justen Robertson
  * @version 0.1a
- * @license GPL v2.0 http://www.gnu.org/licenses/gpl-2.0.html
+ * @license GPL
  *
  * Creates paired country/state select boxes. The state box will update with
  * appropriate states/provinces for the selected country. Requires
@@ -11,7 +10,7 @@
  *
  */
 
-(function(){
+(function($){
 	jQuery.fn.countryState = function(second, options) {
 
 	var countries = {
@@ -61,7 +60,7 @@
 		"Bouvet Island":{"key":"BV","values":{"N/A":"N/A"}},
 		"Brazil":{
 			"key":"BR",
-			"value":{
+			"values":{
 				"Acre":"AC",
 				"Alagoas":"AL",
 				"Amazonas":"AM",
@@ -415,8 +414,8 @@
 			"values": {
 				"Alaska":"AK",
 				"Alabama":"AL",
-				"Arkansas":"AR",
 				"American Samoa":"AS",
+				"Arkansas":"AR",
 				"Arizona":"AZ",
 				"California":"CA",
 				"Colorado":"CO",
@@ -424,7 +423,6 @@
 				"D.C.":"DC",
 				"Delaware":"DE",
 				"Florida":"FL",
-				"Micronesia":"FM",
 				"Georgia":"GA",
 				"Guam":"GU",
 				"Hawaii":"HI",
@@ -438,11 +436,12 @@
 				"Massachusetts":"MA",
 				"Maryland":"MD",
 				"Maine":"ME",
+				"Marianas":"MP",
 				"Marshall Islands":"MH",
 				"Michigan":"MI",
+				"Micronesia":"FM",
 				"Minnesota":"MN",
 				"Missouri":"MO",
-				"Marianas":"MP",
 				"Mississippi":"MS",
 				"Montana":"MT",
 				"North Carolina":"NC",
@@ -456,9 +455,9 @@
 				"Ohio":"OH",
 				"Oklahoma":"OK",
 				"Oregon":"OR",
+				"Palau":"PW",
 				"Pennsylvania":"PA",
 				"Puerto Rico":"PR",
-				"Palau":"PW",
 				"Rhode Island":"RI",
 				"South Carolina":"SC",
 				"South Dakota":"SD",
@@ -501,7 +500,7 @@
 			for(country in countries) {
 				if(countries[country].values && !countries[country].values['N/A']) {
 					var empty = {};
-					empty[options.emptyKey] = options.emptyValue;
+					empty[options.emptyValue] = options.emptyKey;
 					countries[country].values = $.extend(empty, countries[country].values);
 				}
 			}
@@ -512,16 +511,17 @@
 		 */
 		if(options.preselectFirst) {
 			if(countries[options.preselectFirst]) {
-				options.preselectFirst = states[options.preselectFirst].key;
+				options.preselectFirst = countries[options.preselectFirst].key;
 			}
 		}
 		if(options.preselectSecond) {
-			for(country in states) {
-				if(country.values && country.values[options.preselectFirst]) {
-					options.preselectFirst = country.values[options.preselectFirst];
+			for(country in countries) {
+				if(countries[country].values[options.preselectFirst]) {
+					options.preselectFirst = countries[country].values[options.preselectFirst];
 				}
 			}
 		}
-		jQuery(this).doubleSelect(second, states, options);
+
+		jQuery(this).doubleSelect(second, countries, options);
 	};
 })(jQuery);
