@@ -1,0 +1,17 @@
+Creates paired country/state select boxes. The state box will update with
+appropriate states/provinces for the selected country. Requires
+jQuery.doubleSelect (http://www.jgeppert.com/jquery-doubleselect/).
+
+Usage:
+jQuery(function($) {
+	var options = {
+		emptyOption:true,
+		emptyKey:'',
+		emptyValue:'-------',
+		preselectFirst : 'US',
+		preselectSecond: 'AK'
+	}
+	$('#country').doubleSelect('#state', options);
+});
+
+License GPL v.2.0.

@@ -1,8 +1,9 @@
 /**
  * @package jQuery Country-State Select Plugin
  * @author Justen Robertson <justen@justenrobertson.com>
+ * @copyright (C) 2011 Justen Robertson
  * @version 0.1a
- * @license GPL
+ * @license GPL v2.0 http://www.gnu.org/licenses/gpl-2.0.html
  *
  * Creates paired country/state select boxes. The state box will update with
  * appropriate states/provinces for the selected country. Requires
